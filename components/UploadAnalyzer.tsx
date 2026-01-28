@@ -66,28 +66,42 @@ export const UploadAnalyzer: React.FC<DataEntryProps> = ({ onDataUpdate, current
     setSalesItems(existingSales);
 
     setFormData(prev => {
-      const base = existing || {
-         ...prev,
-         date: date,
-         totalRevenue: existing ? existing.totalRevenue : 0,
-         morningRevenue: existing ? existing.morningRevenue : 0,
-         eveningRevenue: existing ? existing.eveningRevenue : 0,
-         discounts: existing ? existing.discounts : 0,
-         costOfGoodsSold: existing ? existing.costOfGoodsSold : 0,
-         wasteCost: existing ? existing.wasteCost : 0,
-         staffSalary: existing ? existing.staffSalary : 0,
-         staffBonus: existing ? existing.staffBonus : 0,
-         staffAllowance: existing ? existing.staffAllowance : 0,
-      };
-
-      return {
-        ...base,
+      // TypeScript Fix: Use explicit if/else instead of logical OR with objects to prevent 'never' type inference on 'existing'
+      const expenseFields = {
         marketing: marketingSum,
         tools: toolsSum,
         consumables: consumablesSum,
         otherCash: otherSum,
         costOfGoodsImport: importSum
       };
+
+      if (existing) {
+        return {
+          ...prev, // Keep prev to ensure all keys present
+          ...existing,
+          ...expenseFields
+        };
+      } else {
+        // Reset fields for new date but keep current date and prev structure
+        return {
+          ...prev,
+          date: date,
+          totalRevenue: 0,
+          morningRevenue: 0,
+          eveningRevenue: 0,
+          discounts: 0,
+          netRevenue: 0,
+          costOfGoodsSold: 0,
+          wasteCost: 0,
+          staffSalary: 0,
+          staffBonus: 0,
+          staffAllowance: 0,
+          staffTotalCost: 0,
+          operatingTotalCost: 0,
+          netProfit: 0,
+          ...expenseFields
+        };
+      }
     });
   }, [formData.date, currentData.expenses, currentData.businessResults, currentData.salesDetails]);
 
