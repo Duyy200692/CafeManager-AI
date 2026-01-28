@@ -1,10 +1,11 @@
 import { GoogleGenAI } from "@google/genai";
 import { AppState } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export const analyzeExcelImage = async (base64Image: string): Promise<Partial<AppState>> => {
   try {
+    // API Key must be obtained exclusively from process.env.API_KEY
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
     const prompt = `
       Bạn là một chuyên gia phân tích dữ liệu tài chính F&B (quán cafe).
       Nhiệm vụ của bạn là trích xuất dữ liệu từ hình ảnh bảng tính Excel được cung cấp.
