@@ -55,7 +55,7 @@ export const Login: React.FC<LoginProps> = ({ staffList, onLogin }) => {
             <div className="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center font-bold text-3xl text-white mx-auto mb-4">
               C
             </div>
-            <h2 className="text-2xl font-bold text-slate-800">Cafe Manager AI</h2>
+            <h2 className="text-2xl font-bold text-slate-800">Manager Revital Coffee</h2>
             <p className="text-slate-500 text-sm mt-1">Hệ thống quản lý nội bộ</p>
           </div>
 
