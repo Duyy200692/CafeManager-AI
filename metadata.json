@@ -1,0 +1,5 @@
+{
+  "name": "CafeManager AI",
+  "description": "Hệ thống quản lý nội bộ quán cafe. Tự động chuyển đổi hình ảnh báo cáo Excel thành biểu đồ trực quan và dữ liệu số bằng Gemini AI.",
+  "requestFramePermissions": []
+}
