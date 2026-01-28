@@ -137,8 +137,9 @@ const MOCK_INVENTORY_SESSIONS: DailyInventorySession[] = [
   // ... (Keeping mock sessions as is)
 ];
 
-const YEAR = 2026;
-const MONTH = 1; // January
+const today = new Date();
+const YEAR = today.getFullYear();
+const MONTH = today.getMonth() + 1;
 
 // Prepare MOCK DATA Objects for Seeding
 const businessResultsMock = generateDailyBusinessResults(YEAR, MONTH);

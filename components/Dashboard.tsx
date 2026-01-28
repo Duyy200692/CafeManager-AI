@@ -14,7 +14,14 @@ const COLORS = ['#ea580c', '#3b82f6', '#ef4444', '#a855f7', '#fbbf24', '#84cc16'
 
 export const Dashboard: React.FC<DashboardProps> = ({ data }) => {
   // State for filtering and view mode
-  const [selectedMonth, setSelectedMonth] = useState<string>('2024-01'); // Default to mock data month
+  // Fix: Default to CURRENT month instead of hardcoded date
+  const [selectedMonth, setSelectedMonth] = useState<string>(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    return `${year}-${month}`;
+  });
+  
   const [viewMode, setViewMode] = useState<'overview' | 'calendar'>('overview');
   
   // State for Calendar Detail Modal

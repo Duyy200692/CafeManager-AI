@@ -13,18 +13,20 @@ export const DataTables: React.FC<TablesProps> = ({ data }) => {
     new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(val);
 
   // Filter logic
-  const filteredBusinessResults = data.businessResults.filter(item => {
-     // Check if date matches
-     const formattedDate = formatDateVN(item.date);
-     return formattedDate.includes(searchTerm) || item.date.includes(searchTerm);
-  });
+  const filteredBusinessResults = data.businessResults
+    .filter(item => {
+       // Check if date matches
+       const formattedDate = formatDateVN(item.date);
+       return formattedDate.includes(searchTerm) || item.date.includes(searchTerm);
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort newest first
 
   return (
     <div className="space-y-8">
       {/* Business Results Table */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
         <div className="px-6 py-4 bg-slate-50 border-b border-slate-100 flex justify-between items-center flex-wrap gap-4">
-          <h3 className="font-semibold text-slate-800">Chi tiết Kết Quả Kinh Doanh (Tháng 1/2024)</h3>
+          <h3 className="font-semibold text-slate-800">Chi tiết Kết Quả Kinh Doanh</h3>
           
           <div className="relative">
             <input 
